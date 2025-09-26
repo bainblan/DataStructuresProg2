@@ -20,7 +20,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         if (curr.getBack() != null) {
             curr.getBack().setNext(curr.getNext());
         } else {
-            head = curr.getNext(); // Deleting the head
+            head = curr.getNext(); 
         }
         if (curr.getNext() != null) {
             curr.getNext().setBack(curr.getBack());
@@ -94,5 +94,4 @@ public class DoublyLinkedList<T extends Comparable<T>> {
 
     public DoublyLinkedList<T> reverseList() {}
 
-    public 
 }
