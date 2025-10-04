@@ -1,9 +1,14 @@
+
 public class DoublyLinkedList<T extends Comparable<T>> {
 
     private NodeType<T> head;
+    private NodeType<T> tail;
+    private int size;
 
     public DoublyLinkedList() {
         head = null;
+        tail = null;
+        size = 0;
     }
 
     public void deleteItem(T item) {
@@ -20,7 +25,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         if (curr.getBack() != null) {
             curr.getBack().setNext(curr.getNext());
         } else {
-            head = curr.getNext(); 
+            head = curr.getNext();
         }
         if (curr.getNext() != null) {
             curr.getNext().setBack(curr.getBack());
@@ -30,40 +35,41 @@ public class DoublyLinkedList<T extends Comparable<T>> {
     public void insertItem(T item) {
         NodeType<T> newNode = new NodeType<>();
         newNode.setInfo(item);
+        NodeType<T> curr = head;
+
         if (head == null) {
             head = newNode;
-            return;
+            tail = newNode;
+        } else {
+            //Iterate
+            while (curr.getNext() != null && curr.getInfo().compareTo(item) < 0) {
+                if (curr.getInfo().compareTo(item) == 0) {
+                    throw new IllegalArgumentException("Item already exists");
+                }
+                curr = curr.getNext();
+            }
+
+            //End Case
+            if (curr.getInfo().compareTo(item) < 0) {
+                curr.setNext(newNode);
+                newNode.setBack(curr);
+                tail = newNode;
+                size++;
+                return;
+            } else {
+                //Main Case
+                curr.getBack().setNext(newNode);
+                newNode.setBack(curr.getBack());
+                newNode.setNext(curr);
+                curr.setBack(newNode);
+            }
+
         }
-        if (head.getInfo().compareTo(item) > 0) {
-            newNode.setNext(head);
-            head.setBack(newNode);
-            head = newNode;
-            return;
-        }
-        NodeType<T> curr = head;
-        while (curr.getNext() != null && curr.getNext().getInfo().compareTo(item) < 0) {
-            curr = curr.getNext();
-        }
-        if (curr.getNext().getInfo().compareTo(item) == 0
-                || curr.getNext() != null && curr.getInfo().compareTo(item) == 0) {
-            throw new IllegalArgumentException("Can't insert duplicates");
-        }
-        newNode.setNext(curr.getNext());
-        newNode.setBack(curr);
-        if (curr.getNext() != null) {
-            curr.getNext().setBack(newNode);
-        }
-        curr.setNext(newNode);
+
     }
 
     public int length() {
-        int count = 0;
-        NodeType<T> curr = head;
-        while (curr != null) {
-            count++;
-            curr = curr.getNext();
-        }
-        return count;
+        return size;
     }
 
     public void print() {
@@ -90,8 +96,11 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         System.out.println();
     }
 
-    public void deleteSubsection(T lower, T upper) {}
+    public void deleteSubsection(T lower, T upper) {
+    }
 
-    public DoublyLinkedList<T> reverseList() {}
+    public DoublyLinkedList<T> reverseList() {
+        return null;
+    }
 
 }
