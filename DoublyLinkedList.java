@@ -112,10 +112,33 @@ public class DoublyLinkedList<T extends Comparable<T>> {
     }
 
     public void deleteSubsection(T lower, T upper) {
+        if (head == null) {
+            throw new IllegalArgumentException("List is empty");
+        }
+        NodeType<T> curr = head;
+        while (curr.getNext() != null) {
+            if (curr.getInfo().compareTo(lower) >= 0 && curr.getInfo().compareTo(upper) <= 0) {
+                deleteItem(curr.getInfo());
+            }
+            curr = curr.getNext();
+
+        }
     }
 
-    public DoublyLinkedList<T> reverseList() {
-        return null;
+    public void reverseList() {
+        if (head == null) {
+            throw new IllegalArgumentException("List is empty");
+        }
+        NodeType<T> curr = head;
+        while (curr != null) {
+            NodeType<T> temp = curr.getNext();
+            curr.setNext(curr.getBack());
+            curr.setBack(temp);
+            curr = temp;
+        }
+        NodeType<T> temp = head;
+        head = tail;
+        tail = temp;
     }
 
 }
