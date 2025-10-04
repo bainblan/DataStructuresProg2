@@ -141,4 +141,40 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         tail = temp;
     }
 
+    public void swapAlternate() {
+        if (head == null) {
+            throw new IllegalArgumentException("List is empty");
+        } else if (head.getNext() == null) {
+            return;
+        }
+
+        NodeType<T> curr = head;
+        while (curr != null && curr.getNext() != null) {
+            NodeType<T> first = curr;
+            NodeType<T> second = curr.getNext();
+
+            //Connect last pair
+            if (first.getBack() != null) {
+                first.getBack().setNext(second);
+            } else {
+                head = second;
+            }
+
+            //Connect next pair
+            if (second.getNext() != null) {
+                second.getNext().setBack(first);
+            } else {
+                tail = first;
+            }
+
+            first.setNext(second.getNext());
+            second.setBack(first.getBack());
+            second.setNext(first);
+            first.setBack(second);
+
+            curr = first.getNext();
+        }
+
+    }
+
 }
