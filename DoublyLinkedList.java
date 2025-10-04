@@ -33,7 +33,6 @@ public class DoublyLinkedList<T extends Comparable<T>> {
                 tail = null;
             }
             size--;
-            return;
         } else if (curr == tail) {
             tail = tail.getBack();
             if (tail != null) {
@@ -42,12 +41,10 @@ public class DoublyLinkedList<T extends Comparable<T>> {
                 head = null;
             }
             size--;
-            return;
         } else {
             curr.getBack().setNext(curr.getNext());
             curr.getNext().setBack(curr.getBack());
             size--;
-            return;
         }
     }
 
@@ -74,7 +71,6 @@ public class DoublyLinkedList<T extends Comparable<T>> {
                 newNode.setBack(curr);
                 tail = newNode;
                 size++;
-                return;
             } else {
                 //Main Case
                 curr.getBack().setNext(newNode);
@@ -92,6 +88,9 @@ public class DoublyLinkedList<T extends Comparable<T>> {
     }
 
     public void print() {
+        if (head == null) {
+            return;
+        }
         NodeType<T> curr = head;
         while (curr != null) {
             System.out.print(curr.getInfo() + " ");
@@ -104,10 +103,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         if (head == null) {
             return;
         }
-        NodeType<T> curr = head;
-        while (curr.getNext() != null) {
-            curr = curr.getNext();
-        }
+        NodeType<T> curr = tail;
         while (curr != null) {
             System.out.print(curr.getInfo() + " ");
             curr = curr.getBack();
