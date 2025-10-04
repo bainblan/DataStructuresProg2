@@ -16,19 +16,38 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             throw new IllegalArgumentException("List is empty");
         }
         NodeType<T> curr = head;
-        while (curr != null && !curr.getInfo().equals(item)) {
+        //Iterate
+        while (curr != null && curr.getInfo().compareTo(item) != 0) {
             curr = curr.getNext();
         }
+        //Unfound Case
         if (curr == null) {
-            throw new IllegalArgumentException("Item does not exist");
+            throw new IllegalArgumentException("Item not found");
         }
-        if (curr.getBack() != null) {
-            curr.getBack().setNext(curr.getNext());
+        //Found Case
+        if (curr == head) {
+            head = head.getNext();
+            if (head != null) {
+                head.setBack(null);
+            } else {
+                tail = null;
+            }
+            size--;
+            return;
+        } else if (curr == tail) {
+            tail = tail.getBack();
+            if (tail != null) {
+                tail.setNext(null);
+            } else {
+                head = null;
+            }
+            size--;
+            return;
         } else {
-            head = curr.getNext();
-        }
-        if (curr.getNext() != null) {
+            curr.getBack().setNext(curr.getNext());
             curr.getNext().setBack(curr.getBack());
+            size--;
+            return;
         }
     }
 
