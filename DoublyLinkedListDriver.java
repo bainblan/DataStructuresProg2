@@ -38,5 +38,6 @@ public class DoublyLinkedListDriver {
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
         }
+        input.close();
     }
 }

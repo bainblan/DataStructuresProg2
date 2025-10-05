@@ -6,3 +6,6 @@ Baines.Blanton@uga.edu
 
 Caleb.Cort@uga.edu
 
+Compile: javac -d bin *.java
+
+Run: java DoublyLinkedListDriver.java string-input.txt
