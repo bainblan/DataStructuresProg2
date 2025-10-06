@@ -102,6 +102,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             return;
         }
         NodeType<T> curr = head;
+        System.out.print("The list is: ");
         while (curr != null) {
             System.out.print(curr.getInfo() + " ");
             curr = curr.getNext();

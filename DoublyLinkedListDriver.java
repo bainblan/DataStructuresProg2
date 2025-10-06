@@ -8,6 +8,7 @@ public class DoublyLinkedListDriver {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter list type (i - int, d - double, s - string): ");
+        String type = "";
         char command = input.next().charAt(0);
         // make list visible to the later command handling switch
         DoublyLinkedList list = null;
@@ -17,21 +18,23 @@ public class DoublyLinkedListDriver {
             switch (command) {
                 case 'i': {
                     list = new DoublyLinkedList<Integer>();
+                    type = "number";
                     while (s.hasNext()) {
-                        list.insertItem(Integer.parseInt(s.next()));
-                        System.out.println("");
+                        list.insertItem(Integer.valueOf(s.next()));
                     }
                     break;
                 }
                 case 'd': {
                     list = new DoublyLinkedList<Double>();
+                    type = "double";
                     while (s.hasNext()) {
-                        list.insertItem(Double.parseDouble(s.next()));
+                        list.insertItem(Double.valueOf(s.next()));
                     }
                     break;
                 }
                 case 's': {
                     list = new DoublyLinkedList<String>();
+                    type = "string";
                     while (s.hasNext()) {
                         list.insertItem(s.next());
                     }
@@ -66,29 +69,28 @@ public class DoublyLinkedListDriver {
                     System.out.println("Exiting the program...");
                     break;
                 case 'i':
-                    iCalled(input, list);
+                    iCalled(input, list, type);
                     break;
                 case 'd':
-                    dCalled(input, list);
-                    break;
-                case 's':
-                    sCalled(input, list);
-                    break;
-                case 'a':
-                    aCalled(input, list);
-                    break;
-                case 'm':
-                    mCalled(input, list);
-                    break;
-                case 't':
-                    tCalled(input, list);
+                    dCalled(input, list, type);
                     break;
                 case 'p':
-                    System.out.print("The list is: ");
-                    list.print();
+                    pCalled(input, list, type);
                     break;
                 case 'l':
-                    System.out.println("The length of the list is " + list.length());
+                    lCalled(input, list, type);
+                    break;
+                case 't':
+                    tCalled(input, list, type);
+                    break;
+                case 'r':
+                    rCalled(input, list, type);
+                    break;
+                case 'b':
+                    bCalled(input, list, type);
+                    break;
+                case 's':
+                    sCalled(input, list, type);
                     break;
                 default:
                     break;
@@ -97,27 +99,48 @@ public class DoublyLinkedListDriver {
         input.close();
     }
 
-    public static void dCalled(Scanner input, DoublyLinkedList list) {
+    public static void iCalled(Scanner input, DoublyLinkedList list, String type) {
+        list.print();
+        System.out.println("Enter a " + type + " to insert: ");
+        if (type.equals("number")) {
+            Integer value = input.nextInt();
+            list.insertItem(value);
+        } else if (type.equals("double")) {
+            Double value = input.nextDouble();
+            list.insertItem(value);
+        } else if (type.equals("string")) {
+            String value = input.next();
+            list.insertItem(value);
+        }
+        list.print();
+        list.printReverse();
+    }
+
+    public static void dCalled(Scanner input, DoublyLinkedList list, String type) {
         System.out.println("dCalled executed");
     }
 
-    public static void iCalled(Scanner input, DoublyLinkedList list) {
-        System.out.println("iCalled executed");
+    public static void pCalled(Scanner input, DoublyLinkedList list, String type) {
+        list.print();
     }
 
-    public static void sCalled(Scanner input, DoublyLinkedList list) {
-        System.out.println("sCalled executed");
+    public static void lCalled(Scanner input, DoublyLinkedList list, String type) {
+        System.out.println("The length of the list is: " + list.length());
     }
 
-    public static void mCalled(Scanner input, DoublyLinkedList list) {
-        System.out.println("mCalled executed");
-    }
-
-    public static void aCalled(Scanner input, DoublyLinkedList list) {
-        System.out.println("aCalled executed");
-    }
-
-    public static void tCalled(Scanner input, DoublyLinkedList list) {
+    public static void tCalled(Scanner input, DoublyLinkedList list, String type) {
         System.out.println("tCalled executed");
+    }
+
+    public static void rCalled(Scanner input, DoublyLinkedList list, String type) {
+        System.out.println("rCalled executed");
+    }
+
+    public static void bCalled(Scanner input, DoublyLinkedList list, String type) {
+        System.out.println("bCalled executed");
+    }
+
+    public static void sCalled(Scanner input, DoublyLinkedList list, String type) {
+        System.out.println("sCalled executed");
     }
 }
