@@ -5,6 +5,15 @@ import java.util.Scanner;
 
 public class DoublyLinkedListDriver {
 
+    /**
+     * Driver program for the DoublyLinkedList project.
+     *
+     * Usage: java DoublyLinkedListDriver <input-file>
+     * The program prompts for a list type (i/d/s) and then accepts interactive
+     * commands.
+     *
+     * @param args command-line arguments (args[0] should be the input filename)
+     */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter list type (i - int, d - double, s - string): ");
@@ -99,6 +108,16 @@ public class DoublyLinkedListDriver {
         input.close();
     }
 
+    /**
+     * Handle the insert command. Prompts the user for a value of the correct
+     * type, inserts it into the list, and prints the list forwards and in
+     * reverse.
+     *
+     * @param input Scanner to read user input
+     * @param list the DoublyLinkedList to operate on
+     * @param type a string indicating the value type
+     * ("number","double","string")
+     */
     public static void iCalled(Scanner input, DoublyLinkedList list, String type) {
         list.print();
         System.out.println("Enter a " + type + " to insert: ");
@@ -116,6 +135,15 @@ public class DoublyLinkedListDriver {
         list.printReverse();
     }
 
+    /**
+     * Handle the delete command. Prompts the user for a value, deletes it from
+     * the list (if present), and prints the list forwards and in reverse.
+     *
+     * @param input Scanner to read user input
+     * @param list the DoublyLinkedList to operate on
+     * @param type a string indicating the value type
+     * ("number","double","string")
+     */
     public static void dCalled(Scanner input, DoublyLinkedList list, String type) {
         list.print();
         System.out.println("Enter a " + type + " to delete: ");
@@ -133,23 +161,60 @@ public class DoublyLinkedListDriver {
         list.printReverse();
     }
 
+    /**
+     * Handle the print command: print the list forwards.
+     *
+     * @param input Scanner (unused)
+     * @param list the DoublyLinkedList to print
+     * @param type the current data type (unused)
+     */
     public static void pCalled(Scanner input, DoublyLinkedList list, String type) {
         list.print();
     }
 
+    /**
+     * Handle the length command: print the number of elements in the list.
+     *
+     * @param input Scanner (unused)
+     * @param list the DoublyLinkedList to query
+     * @param type the current data type (unused)
+     */
     public static void lCalled(Scanner input, DoublyLinkedList list, String type) {
         System.out.println("The length of the list is: " + list.length());
     }
 
+    /**
+     * Handle the print-reverse command: print the list from tail to head.
+     *
+     * @param input Scanner (unused)
+     * @param list the DoublyLinkedList to print
+     * @param type the current data type (unused)
+     */
     public static void tCalled(Scanner input, DoublyLinkedList list, String type) {
         list.printReverse();
     }
 
+    /**
+     * Handle the reverse command: reverse the list in-place and print it.
+     *
+     * @param input Scanner (unused)
+     * @param list the DoublyLinkedList to reverse
+     * @param type the current data type (unused)
+     */
     public static void rCalled(Scanner input, DoublyLinkedList list, String type) {
         list.reverseList();
         list.printReverse();
     }
 
+    /**
+     * Handle the "b" command which deletes a subsection of the list between
+     * user-provided lower and upper bounds (inclusive). The bounds are read as
+     * the current data type.
+     *
+     * @param input Scanner used to read bounds
+     * @param list the DoublyLinkedList to modify
+     * @param type the current data type ("number","double","string")
+     */
     public static void bCalled(Scanner input, DoublyLinkedList list, String type) {
         try {
             if (type.equals("number")) {
@@ -195,6 +260,14 @@ public class DoublyLinkedListDriver {
         }
     }
 
+    /**
+     * Handle the swap-alternate command: swap each adjacent pair of nodes, then
+     * print the list and its reverse.
+     *
+     * @param input Scanner (unused)
+     * @param list the DoublyLinkedList to operate on
+     * @param type the current data type (unused)
+     */
     public static void sCalled(Scanner input, DoublyLinkedList list, String type) {
         try {
             System.out.print("The original list: ");

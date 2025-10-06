@@ -1,16 +1,31 @@
 
+/**
+ * A generic doubly-linked list that maintains sorted order on insert.
+ *
+ * @param <T> the element type (must implement Comparable)
+ */
 public class DoublyLinkedList<T extends Comparable<T>> {
 
     private NodeType<T> head;
     private NodeType<T> tail;
     private int size;
 
+    /**
+     * Construct an empty DoublyLinkedList.
+     */
     public DoublyLinkedList() {
         head = null;
         tail = null;
         size = 0;
     }
 
+    /**
+     * Delete the first occurrence of item from the list.
+     *
+     * @param item element to remove
+     * @throws IllegalArgumentException if the list is empty or the item is not
+     * found
+     */
     public void deleteItem(T item) {
         if (head == null) {
             throw new IllegalArgumentException("You cannot delete from an empty list");
@@ -48,6 +63,13 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Insert an item into the list keeping the list sorted in ascending order.
+     * Duplicate values are not allowed.
+     *
+     * @param item element to insert
+     * @throws IllegalArgumentException if the item already exists
+     */
     public void insertItem(T item) {
         NodeType<T> newNode = new NodeType<>();
         newNode.setInfo(item);
@@ -93,10 +115,19 @@ public class DoublyLinkedList<T extends Comparable<T>> {
 
     }
 
+    /**
+     * Return the current number of elements in the list.
+     *
+     * @return size of the list
+     */
     public int length() {
         return size;
     }
 
+    /**
+     * Print the list contents from head to tail to standard output. If the list
+     * is empty this method prints nothing.
+     */
     public void print() {
         if (head == null) {
             return;
@@ -110,6 +141,10 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         System.out.println();
     }
 
+    /**
+     * Print the list contents from tail to head to standard output. If the list
+     * is empty this method prints nothing.
+     */
     public void printReverse() {
         if (head == null) {
             return;
@@ -122,6 +157,13 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         System.out.println();
     }
 
+    /**
+     * Delete all items x such that lower <= x <= upper.
+     *
+     * @param lower lower bound (inclusive)
+     * @param upper upper bound (inclusive)
+     * @throws IllegalArgumentException if the list is empty
+     */
     public void deleteSubsection(T lower, T upper) {
         if (head == null) {
             throw new IllegalArgumentException("List is empty");
@@ -137,6 +179,10 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Reverse the list in-place (swap next/back pointers and swap head/tail).
+     * This is a linear-time operation.
+     */
     public void reverseList() {
         // empty or single-element list: nothing to do
         if (head == null || head.getNext() == null) {
@@ -155,6 +201,10 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         tail = temp;
     }
 
+    /**
+     * Swap every pair of adjacent nodes: (1,2,3,4) -> (2,1,4,3). If the list
+     * has odd length the final node remains in place.
+     */
     public void swapAlternate() {
         // empty or single-element list: nothing to do
         if (head == null || head.getNext() == null) {
