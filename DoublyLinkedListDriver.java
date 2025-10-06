@@ -59,8 +59,8 @@ public class DoublyLinkedListDriver {
             System.out.print("Enter command: ");
             command = input.next().charAt(0);
             while (command != 'q' && command != 'i' && command != 'd' && command != 'p'
-                    && command != 'l' && command != 'm' && command != 't'
-                    && command != 's' && command != 'a') {
+                    && command != 'l' && command != 't' && command != 'r'
+                    && command != 's' && command != 'b') {
                 System.out.print("Invalid command try again: ");
                 command = input.next().charAt(0);
             }
