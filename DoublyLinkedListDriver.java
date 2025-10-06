@@ -117,7 +117,20 @@ public class DoublyLinkedListDriver {
     }
 
     public static void dCalled(Scanner input, DoublyLinkedList list, String type) {
-        System.out.println("dCalled executed");
+        list.print();
+        System.out.println("Enter a " + type + " to delete: ");
+        if (type.equals("number")) {
+            Integer value = input.nextInt();
+            list.deleteItem(value);
+        } else if (type.equals("double")) {
+            Double value = input.nextDouble();
+            list.deleteItem(value);
+        } else if (type.equals("string")) {
+            String value = input.next();
+            list.deleteItem(value);
+        }
+        list.print();
+        list.printReverse();
     }
 
     public static void pCalled(Scanner input, DoublyLinkedList list, String type) {
@@ -129,18 +142,70 @@ public class DoublyLinkedListDriver {
     }
 
     public static void tCalled(Scanner input, DoublyLinkedList list, String type) {
-        System.out.println("tCalled executed");
+        list.printReverse();
     }
 
     public static void rCalled(Scanner input, DoublyLinkedList list, String type) {
-        System.out.println("rCalled executed");
+        list.reverseList();
+        list.printReverse();
     }
 
     public static void bCalled(Scanner input, DoublyLinkedList list, String type) {
-        System.out.println("bCalled executed");
+        try {
+            if (type.equals("number")) {
+                System.out.println("Enter the lower bound: ");
+                Integer lower = input.nextInt();
+                System.out.println("Enter the upper bound: ");
+                Integer upper = input.nextInt();
+
+                System.out.print("The original list: ");
+                list.print();
+                list.deleteSubsection(lower, upper);
+            } else if (type.equals("double")) {
+                System.out.println("Enter the lower bound: ");
+                Double lower = input.nextDouble();
+                System.out.println("Enter the upper bound: ");
+                Double upper = input.nextDouble();
+
+                System.out.print("The original list: ");
+                list.print();
+                list.deleteSubsection(lower, upper);
+            } else if (type.equals("string")) {
+                System.out.println("Enter the lower bound: ");
+                String lower = input.next();
+                System.out.println("Enter the upper bound: ");
+                String upper = input.next();
+
+                System.out.print("The original list: ");
+                list.print();
+                list.deleteSubsection(lower, upper);
+            } else {
+                System.out.print("The original list: ");
+                list.print();
+                return;
+            }
+
+            System.out.print("The modified list: ");
+            list.print();
+
+            System.out.print("The reverse list: ");
+            list.printReverse();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Cannot delete subsection: " + e.getMessage());
+        }
     }
 
     public static void sCalled(Scanner input, DoublyLinkedList list, String type) {
-        System.out.println("sCalled executed");
+        try {
+            System.out.print("The original list: ");
+            list.print();
+            list.swapAlternate();
+            System.out.print("The modified list: ");
+            list.print();
+            System.out.print("The reverse list: ");
+            list.printReverse();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Cannot swap alternates: " + e.getMessage());
+        }
     }
 }

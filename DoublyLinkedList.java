@@ -13,7 +13,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
 
     public void deleteItem(T item) {
         if (head == null) {
-            throw new IllegalArgumentException("List is empty");
+            throw new IllegalArgumentException("You cannot delete from an empty list");
         }
         NodeType<T> curr = head;
         //Iterate
