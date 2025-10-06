@@ -10,11 +10,6 @@ public class DoublyLinkedListDriver {
         System.out.println("Enter list type (i - int, d - double, s - string): ");
         char command = input.next().charAt(0);
 
-        if (args.length != 1) {
-            System.out.println("Please provide a valid command.");
-            return;
-        }
-
         try (Scanner s = new Scanner(new File(args[0]))) {
 
             switch (command) {
