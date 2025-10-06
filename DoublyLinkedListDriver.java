@@ -15,7 +15,7 @@ public class DoublyLinkedListDriver {
     /**
      * Driver program for the DoublyLinkedList project.
      *
-     * Usage: java DoublyLinkedListDriver <input-file>
+     * Usage: java DoublyLinkedListDriver &lt;input file&gt;
      * The program prompts for a list type (i/d/s) and then accepts interactive
      * commands.
      *
@@ -30,33 +30,33 @@ public class DoublyLinkedListDriver {
         DoublyLinkedList list = null;
         try (Scanner s = new Scanner(new File(args[0]))) {
             switch (command) {
-                case 'i': {
-                    list = new DoublyLinkedList<Integer>();
-                    type = "number";
-                    while (s.hasNext()) {
-                        list.insertItem(Integer.valueOf(s.next()));
-                    }
-                    break;
+            case 'i': {
+                list = new DoublyLinkedList<Integer>();
+                type = "number";
+                while (s.hasNext()) {
+                    list.insertItem(Integer.valueOf(s.next()));
                 }
-                case 'd': {
-                    list = new DoublyLinkedList<Double>();
-                    type = "double";
-                    while (s.hasNext()) {
-                        list.insertItem(Double.valueOf(s.next()));
-                    }
-                    break;
+                break;
+            }
+            case 'd': {
+                list = new DoublyLinkedList<Double>();
+                type = "double";
+                while (s.hasNext()) {
+                    list.insertItem(Double.valueOf(s.next()));
                 }
-                case 's': {
-                    list = new DoublyLinkedList<String>();
-                    type = "string";
-                    while (s.hasNext()) {
-                        list.insertItem(s.next());
-                    }
-                    break;
+                break;
+            }
+            case 's': {
+                list = new DoublyLinkedList<String>();
+                type = "string";
+                while (s.hasNext()) {
+                    list.insertItem(s.next());
                 }
-                default:
-                    System.out.println("Invalid type entered!");
-                    break;
+                break;
+            }
+            default:
+                System.out.println("Invalid type entered!");
+                break;
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
@@ -92,35 +92,35 @@ public class DoublyLinkedListDriver {
      */
     public static void runCommands(char command, Scanner input, DoublyLinkedList list, String type) {
         switch (command) {
-            case 'q':
-                System.out.println("Exiting the program...");
-                break;
-            case 'i':
-                iCalled(input, list, type);
-                break;
-            case 'd':
-                dCalled(input, list, type);
-                break;
-            case 'p':
-                pCalled(input, list, type);
-                break;
-            case 'l':
-                lCalled(input, list, type);
-                break;
-            case 't':
-                tCalled(input, list, type);
-                break;
-            case 'r':
-                rCalled(input, list, type);
-                break;
-            case 'b':
-                bCalled(input, list, type);
-                break;
-            case 's':
-                sCalled(input, list, type);
-                break;
-            default:
-                break;
+        case 'q':
+            System.out.println("Exiting the program...");
+            break;
+        case 'i':
+            iCalled(input, list, type);
+            break;
+        case 'd':
+            dCalled(input, list, type);
+            break;
+        case 'p':
+            pCalled(input, list, type);
+            break;
+        case 'l':
+            lCalled(input, list, type);
+            break;
+        case 't':
+            tCalled(input, list, type);
+            break;
+        case 'r':
+            rCalled(input, list, type);
+            break;
+        case 'b':
+            bCalled(input, list, type);
+            break;
+        case 's':
+            sCalled(input, list, type);
+            break;
+        default:
+            break;
         }
     }
 
