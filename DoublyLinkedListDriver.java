@@ -10,11 +10,13 @@ public class DoublyLinkedListDriver {
         char command = input.next().charAt(0);
         
         try (Scanner s = new Scanner(new File(args[0]))) {
+
             switch (command) {
                 case 'i': {
                     DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
                     while (s.hasNext()) {
                         list.insertItem(Integer.parseInt(s.next()));
+                        System.out.println("");
                     }
                     break;
                 }
@@ -34,6 +36,7 @@ public class DoublyLinkedListDriver {
                 }
                 default:
                     System.out.println("Invalid type entered!");
+                    break;
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
