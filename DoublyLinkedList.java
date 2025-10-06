@@ -58,7 +58,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             tail = newNode;
             size++;
         } else {
-            // Find the first node >= item (or null if we reach the end)
+            // Iterate
             while (curr != null && curr.getInfo().compareTo(item) < 0) {
                 curr = curr.getNext();
             }
@@ -126,19 +126,22 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             throw new IllegalArgumentException("List is empty");
         }
         NodeType<T> curr = head;
-        while (curr.getNext() != null) {
+        while (curr != null) {
+            NodeType<T> next = curr.getNext();
             if (curr.getInfo().compareTo(lower) >= 0 && curr.getInfo().compareTo(upper) <= 0) {
+                // deleteItem will update head/tail/size correctly
                 deleteItem(curr.getInfo());
             }
-            curr = curr.getNext();
-
+            curr = next;
         }
     }
 
     public void reverseList() {
-        if (head == null) {
-            throw new IllegalArgumentException("List is empty");
+        // empty or single-element list: nothing to do
+        if (head == null || head.getNext() == null) {
+            return;
         }
+
         NodeType<T> curr = head;
         while (curr != null) {
             NodeType<T> temp = curr.getNext();
@@ -152,9 +155,8 @@ public class DoublyLinkedList<T extends Comparable<T>> {
     }
 
     public void swapAlternate() {
-        if (head == null) {
-            throw new IllegalArgumentException("List is empty");
-        } else if (head.getNext() == null) {
+        // empty or single-element list: nothing to do
+        if (head == null || head.getNext() == null) {
             return;
         }
 
@@ -163,25 +165,30 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             NodeType<T> first = curr;
             NodeType<T> second = curr.getNext();
 
-            //Connect last pair
-            if (first.getBack() != null) {
-                first.getBack().setNext(second);
+            NodeType<T> prev = first.getBack();
+            NodeType<T> next = second.getNext();
+
+            // Link prev to second
+            if (prev != null) {
+                prev.setNext(second);
             } else {
                 head = second;
             }
 
-            //Connect next pair
-            if (second.getNext() != null) {
-                second.getNext().setBack(first);
+            // Link next back to first
+            if (next != null) {
+                next.setBack(first);
             } else {
                 tail = first;
             }
 
-            first.setNext(second.getNext());
-            second.setBack(first.getBack());
+            // Swap first and second
+            second.setBack(prev);
             second.setNext(first);
             first.setBack(second);
+            first.setNext(next);
 
+            // advance to the node after the swapped pair
             curr = first.getNext();
         }
 
