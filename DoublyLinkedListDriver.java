@@ -10,24 +10,39 @@ public class DoublyLinkedListDriver {
         System.out.println("Enter list type (i - int, d - double, s - string): ");
         char command = input.next().charAt(0);
 
+        if (args.length != 1) {
+            System.out.println("Please provide a valid command.");
+            return;
+        }
+
         try (Scanner s = new Scanner(new File(args[0]))) {
-            if (command == 'i') {
-                DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
-                while (s.hasNext()) {
-                    list.insertItem(Integer.parseInt(s.next()));
+
+            switch (command) {
+                case 'i': {
+                    DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+                    while (s.hasNext()) {
+                        list.insertItem(Integer.parseInt(s.next()));
+                        System.out.println("");
+                    }
+                    break;
                 }
-            } else if (command == 'd') {
-                DoublyLinkedList<Double> list = new DoublyLinkedList<>();
-                while (s.hasNext()) {
-                    list.insertItem(Double.parseDouble(s.next()));
+                case 'd': {
+                    DoublyLinkedList<Double> list = new DoublyLinkedList<>();
+                    while (s.hasNext()) {
+                        list.insertItem(Double.parseDouble(s.next()));
+                    }
+                    break;
                 }
-            } else if (command == 's') {
-                DoublyLinkedList<String> list = new DoublyLinkedList<>();
-                while (s.hasNext()) {
-                    list.insertItem(s.next());
+                case 's': {
+                    DoublyLinkedList<String> list = new DoublyLinkedList<>();
+                    while (s.hasNext()) {
+                        list.insertItem(s.next());
+                    }
+                    break;
                 }
-            } else {
-                System.out.println("Invalid type entered!");
+                default:
+                    System.out.println("Invalid type entered!");
+                    break;
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
