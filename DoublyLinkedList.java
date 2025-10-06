@@ -56,27 +56,37 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         if (head == null) {
             head = newNode;
             tail = newNode;
+            size++;
         } else {
-            //Iterate
-            while (curr.getNext() != null && curr.getInfo().compareTo(item) < 0) {
-                if (curr.getInfo().compareTo(item) == 0) {
-                    throw new IllegalArgumentException("Item already exists");
-                }
+            // Find the first node >= item (or null if we reach the end)
+            while (curr != null && curr.getInfo().compareTo(item) < 0) {
                 curr = curr.getNext();
             }
 
-            //End Case
-            if (curr.getInfo().compareTo(item) < 0) {
-                curr.setNext(newNode);
-                newNode.setBack(curr);
+            // Duplicate check
+            if (curr != null && curr.getInfo().compareTo(item) == 0) {
+                throw new IllegalArgumentException("Item already exists");
+            }
+
+            // Insert at end
+            if (curr == null) {
+                tail.setNext(newNode);
+                newNode.setBack(tail);
                 tail = newNode;
                 size++;
             } else {
-                //Main Case
-                curr.getBack().setNext(newNode);
-                newNode.setBack(curr.getBack());
+                // Insert before curr
+                NodeType<T> prev = curr.getBack();
                 newNode.setNext(curr);
                 curr.setBack(newNode);
+                newNode.setBack(prev);
+                if (prev != null) {
+                    prev.setNext(newNode);
+                } else {
+                    // inserting at head
+                    head = newNode;
+                }
+                size++;
             }
 
         }
