@@ -37,7 +37,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         }
         //Unfound Case
         if (curr == null) {
-            throw new IllegalArgumentException("Item not found");
+            throw new IllegalArgumentException("The item is not present in the list");
         }
         //Found Case
         if (curr == head) {
@@ -130,10 +130,12 @@ public class DoublyLinkedList<T extends Comparable<T>> {
      */
     public void print() {
         if (head == null) {
+            // Print an empty line so callers that print a prefix (e.g. "The original list: ")
+            // always get a newline even when the list is empty.
+            System.out.println();
             return;
         }
         NodeType<T> curr = head;
-        System.out.print("The list is: ");
         while (curr != null) {
             System.out.print(curr.getInfo() + " ");
             curr = curr.getNext();
@@ -146,7 +148,11 @@ public class DoublyLinkedList<T extends Comparable<T>> {
      * is empty this method prints nothing.
      */
     public void printReverse() {
+        // Always print the heading so callers (like bCalled) will see the
+        // "The reverse list: " label even when the list is empty.
+        System.out.print("The reverse list: ");
         if (head == null) {
+            System.out.println();
             return;
         }
         NodeType<T> curr = tail;
@@ -165,9 +171,6 @@ public class DoublyLinkedList<T extends Comparable<T>> {
      * @throws IllegalArgumentException if the list is empty
      */
     public void deleteSubsection(T lower, T upper) {
-        if (head == null) {
-            throw new IllegalArgumentException("List is empty");
-        }
         NodeType<T> curr = head;
         while (curr != null) {
             NodeType<T> next = curr.getNext();
@@ -202,7 +205,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
     }
 
     /**
-     * Swap every pair of adjacent nodes: (1,2,3,4) -> (2,1,4,3). If the list
+     * Swap every pair of adjacent nodes. If the list
      * has odd length the final node remains in place.
      */
     public void swapAlternate() {
